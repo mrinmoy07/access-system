@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Camera</title>
+</head>
+<body>
+    <h2>Edit Camera: {{ camera.camera_id }}</h2>
+    <a href="{% url 'home' %}" style="text-decoration: none; color: white; background-color: blue; padding: 5px 10px; border-radius: 5px;">Go Back to Home Page</a>
+    <br><br>
+    <form method="post">
+        {% csrf_token %}
+        <label for="camera_id">Camera ID:</label>
+        <input type="text" id="camera_id" name="camera_id" value="{{ camera.camera_id }}" required>
+        <br><br>
+
+        <label for="in_out">In/Out:</label>
+        <select id="in_out" name="in_out">
+            <option value="in" {% if camera.in_out == 'in' %}selected{% endif %}>In</option>
+            <option value="out" {% if camera.in_out == 'out' %}selected{% endif %}>Out</option>
+        </select>
+        <br><br>
+
+        <label for="lock_id">Lock:</label>
+        <select id="lock_id" name="lock_id">
+            {% for lock in locks %}
+                <option value="{{ lock.id }}" {% if lock.id == camera.lock.id %}selected{% endif %}>{{ lock.name }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="attendance">Attendance:</label>
+        <input type="checkbox" id="attendance" name="attendance" {% if camera.attendance %}checked{% endif %}>
+        <br><br>
+
+        <button type="submit">Save Changes</button>
+        <a href="{% url 'manage_cameras_template' %}">Cancel</a>
+    </form>
+</body>
+</html>

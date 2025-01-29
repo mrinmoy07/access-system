@@ -1,0 +1,119 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+    <h2>Edit User</h2>
+    <form method="post" enctype="multipart/form-data" action="{% url 'user_edit_template' user.id %}">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ user.name }}">
+        <br>
+        <label>Role:</label>
+        <select name="role">
+            {% for role in roles %}
+                <option value="{{ role }}" {% if role == user.role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Organization:</label>
+        <select name="organization">
+            {% for org in organizations %}
+                <option value="{{ org.id }}" {% if org.id == user.organization_id %}selected{% endif %}>{{ org.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Department:</label>
+        <select name="department">
+            {% for dept in departments %}
+                <option value="{{ dept.id }}" {% if dept.id == user.department_id %}selected{% endif %}>{{ dept.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ user.designation }}">
+        <br>
+        <label>Blood Group:</label>
+        <input type="text" name="blood_group" value="{{ user.blood_group }}">
+        <br>
+        <label>Emergency Contact:</label>
+        <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}">
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password">
+        <br>
+        <label>Photo:</label>
+        <input type="file" name="photo">
+        <br>
+        <button type="submit">Update User</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit User</title>
+</head>
+<body>
+    <h2>Edit User</h2>
+    
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+
+    <form method="post" enctype="multipart/form-data" action="{% url 'user_edit_template' user.id %}">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ user.name }}">
+        <br>
+        <label>Role:</label>
+        <select name="role">
+            {% for role in roles %}
+                <option value="{{ role }}" {% if role == user.role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Organization:</label>
+        <select name="organization">
+            {% for org in organizations %}
+                <option value="{{ org.id }}" {% if org.id == user.organization_id %}selected{% endif %}>{{ org.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Department:</label>
+        <select name="department">
+            {% for dept in departments %}
+                <option value="{{ dept.id }}" {% if dept.id == user.department_id %}selected{% endif %}>{{ dept.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ user.designation }}">
+        <br>
+        <label>Blood Group:</label>
+        <input type="text" name="blood_group" value="{{ user.blood_group }}">
+        <br>
+        <label>Emergency Contact:</label>
+        <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}">
+        <br>
+        <label>Password:</label>
+        <input type="password" name="password">
+        <br>
+        <label>Photo:</label>
+        <input type="file" name="photo">
+        <br>
+        <button type="submit">Update User</button>
+    </form>
+</body>
+</html>

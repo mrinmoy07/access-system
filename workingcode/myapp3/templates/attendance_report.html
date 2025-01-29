@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Report</title>
+    <style>
+        /* Simple styling for the tables */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Attendance Report</h1>
+    <h2>Period: {{ period }}</h2>
+    <h3>Month: {{ month }} Year: {{ year }}</h3>
+
+    <!-- User Attendance Table -->
+    <h4>User Attendance</h4>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Date</th>
+            <th>In Time</th>
+            <th>Out Time</th>
+            <th>Status</th>
+            {% if period == 'daily' or period == 'weekly' %}
+            <th>Total Time Spent (HH:MM)</th>
+            {% endif %}
+        </tr>
+        {% for attendance in user_attendance %}
+        <tr>
+            <td>{{ attendance.user.name }}</td>
+            <td>{{ attendance.in_time|date:"Y-m-d" }}</td>
+            <td>{{ attendance.in_time|date:"H:i:s" }}</td>
+            <td>{{ attendance.out_time|date:"H:i:s" }}</td>
+            <td>{{ attendance.status }}</td>
+            {% if period == 'daily' or period == 'weekly' %}
+            <td>{{ attendance.time_spent }}</td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="{% if period == 'daily' or period == 'weekly' %}6{% else %}5{% endif %}">No user attendance records found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Guest Attendance Table -->
+    <h4>Guest Attendance</h4>
+    <table>
+        <tr>
+            <th>Guest</th>
+            <th>Date</th>
+            <th>In Time</th>
+            <th>Out Time</th>
+            {% if period == 'daily' or period == 'weekly' %}
+            <th>Total Time Spent (HH:MM)</th>
+            {% endif %}
+        </tr>
+        {% for attendance in guest_attendance %}
+        <tr>
+            <td>{{ attendance.guest.name }}</td>
+            <td>{{ attendance.in_time|date:"Y-m-d" }}</td>
+            <td>{{ attendance.in_time|date:"H:i:s" }}</td>
+            <td>{{ attendance.out_time|date:"H:i:s" }}</td>
+            {% if period == 'daily' or period == 'weekly' %}
+            <td>{{ attendance.time_spent }}</td>
+            {% endif %}
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="{% if period == 'daily' or period == 'weekly' %}5{% else %}4{% endif %}">No guest attendance records found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% if period == 'monthly' %}
+    <h4>Monthly Summary - Users</h4>
+    <p>Total Ontime: {{ monthly_summary.total_ontime }}</p>
+    <p>Total Absent: {{ monthly_summary.total_absent }}</p>
+    <p>Total Late: {{ monthly_summary.total_late }}</p>
+
+    <h4>Total Time Spent by Users</h4>
+    <table>
+        <tr>
+            <th>User</th>
+            <th>Total Time Spent (HH:MM)</th>
+        </tr>
+        {% for user, total_time in monthly_summary.user_time_summary.items %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ total_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h4>Total Time Spent by Guests</h4>
+    <table>
+        <tr>
+            <th>Guest</th>
+            <th>Total Time Spent (HH:MM)</th>
+        </tr>
+        {% for guest, total_time in monthly_summary.guest_time_summary.items %}
+        <tr>
+            <td>{{ guest.name }}</td>
+            <td>{{ total_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

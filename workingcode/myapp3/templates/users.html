@@ -1,0 +1,204 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+    <h2>Users</h2>
+    {% if request.user.role == 'superadmin' %}
+        <a href="{% url 'create_user_template' %}">Create User</a>
+    {% elif request.user.role == 'hr' %}
+        <a href="{% url 'create_user_hr_template' %}">Create User</a>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Employee Code</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Can Create Guest Pass</th>
+            <th>Organization</th>
+            <th>Department</th>
+            <th>Designation</th>
+            <th>Blood Group</th>
+            <th>Emergency Contact</th>
+            <th>Photo</th>
+            <th>Created By</th>
+            <th>Staff</th>
+            <th>Superuser</th>
+            <th>Date Joined</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.employee_code }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.can_create_guest_pass }}</td>
+                <td>{{ user.organization.name }}</td>
+                <td>{{ user.department.name }}</td>
+                <td>{{ user.designation }}</td>
+                <td>{{ user.blood_group }}</td>
+                <td>{{ user.emergency_contact }}</td>
+                <td>{{ user.photo }}</td>
+                <td>{{ user.created_by }}</td>
+                <td>{{ user.is_staff }}</td>
+                <td>{{ user.is_superuser }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>
+                    <a href="{% url 'user' user.id %}">Update</a>
+                    <a href="{% url 'user_delete_template' user.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 6px 12px;
+            color: #fff;
+            background-color: #4CAF50; /* Green background for buttons */
+            border-radius: 4px;
+            margin-right: 10px; /* Space between buttons */
+            display: inline-block; /* Ensure buttons are displayed correctly */
+            width: 100px; /* Uniform button width */
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 90%; /* Slightly smaller width */
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+
+        th, td {
+            padding: 8px 12px; /* Smaller padding for a more compact table */
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        td img {
+            width: 80px; /* Smaller image size */
+            height: 80px;
+            object-fit: cover;
+        }
+
+        td span {
+            font-size: 14px;
+            color: #666;
+        }
+
+        td a {
+            margin: 5px 0; /* Add vertical margin to buttons */
+            display: inline-block; /* Stack buttons vertically */
+        }
+
+        /* Set specific column widths */
+        th:nth-child(3), td:nth-child(3) { /* Role column */
+            width: 20px;
+        }
+
+        th:nth-child(5), td:nth-child(5) { /* Organization column */
+            width: 20px;
+        }
+
+        th:nth-child(6), td:nth-child(6) { /* Department column */
+            width: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Users</h2>
+    {% if request.user.role == 'superadmin' %}
+        <a href="{% url 'create_user_template' %}">Create User</a>
+    {% elif request.user.role == 'hr' %}
+        <a href="{% url 'create_user_hr_template' %}">Create User</a>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Employee Code</th>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Can Create Guest Pass</th>
+            <th>Organization</th>
+            <th>Department</th>
+            <th>Designation</th>
+            <th>Blood Group</th>
+            <th>Emergency Contact</th>
+            <th>Photo</th>
+            <th>Created By</th>
+            <th>Staff</th>
+            <th>Superuser</th>
+            <th>Date Joined</th>
+            <th>Action</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.employee_code }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.role }}</td>
+                <td>{{ user.can_create_guest_pass }}</td>
+                <td>{{ user.organization.name }}</td>
+                <td>{{ user.department.name }}</td>
+                <td>{{ user.designation }}</td>
+                <td>{{ user.blood_group }}</td>
+                <td>{{ user.emergency_contact }}</td>
+                <td>
+                    {% if user.photo %}
+                        <img src="{{ user.photo.url }}" alt="photo">
+                    {% else %}
+                        <span>No Photo Available</span>
+                    {% endif %}
+                </td>
+                <td>{{ user.created_by }}</td>
+                <td>{{ user.is_staff }}</td>
+                <td>{{ user.is_superuser }}</td>
+                <td>{{ user.date_joined }}</td>
+                <td>
+                    <a href="{% url 'user' user.id %}">Update</a>
+                    <a href="{% url 'user_delete_template' user.id %}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

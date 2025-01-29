@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Guest</title>
+</head>
+<body>
+    <h2>Delete Guest</h2>
+    <form id="delete-guest-form" method="post" action="{% url 'delete_guest_template' %}">
+        {% csrf_token %}
+        <label>Guest:</label>
+        <select name="guest" required>
+            <option value="" disabled selected>Select guest List</option>
+            {% for guest in guests %}
+                <option value="{{ guest.id }}">{{ guest }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Delete</button>
+    </form>
+</body>
+</html>

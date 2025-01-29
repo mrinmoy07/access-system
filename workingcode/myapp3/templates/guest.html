@@ -1,0 +1,102 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Guest</title>
+</head>
+<body>
+    <h2>Create Guest</h2>
+    <form id="create-guest-form" method="post" action="{% url 'create_guest_template' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label>Photo:</label>
+        <input type="file" name="photo" required>
+        <br>
+        <label>Visit Date:</label>
+        <input type="date" name="visit_date" required>
+        <br>
+        <label>Start Time:</label>
+        <input type="time" name="start_time" required>
+        <br>
+        <label>End Time:</label>
+        <input type="time" name="end_time" required>
+        <br>
+        <label>Organization:</label>
+        <select type="text" name="organization" required>
+            <option value="" disabled selected>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}">{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Department:</label>
+        <select type="text" name="department" required>
+            <option value="" disabled selected>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Person to Meet:</label>
+        <input type="text" name="person_to_meet">
+        <br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Guest</title>
+</head>
+<body>
+    <h2>Create Guest</h2>
+    <form id="create-guest-form" method="post" action="{% url 'create_guest_template' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label>Photo:</label>
+        <input type="file" name="photo" required>
+        <br>
+        <label>Visit Date:</label>
+        <input type="date" name="visit_date" required min="{{ today }}" />
+        <br>
+        <label>Start Time:</label>
+        <input type="time" name="start_time" required>
+        <br>
+        <label>End Time:</label>
+        <input type="time" name="end_time" required>
+        <br>
+        <label>Organization:</label>
+        <select type="text" name="organization" required>
+            <option value="" disabled selected>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}">{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Department:</label>
+        <select type="text" name="department" required>
+            <option value="" disabled selected>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>Person to Meet:</label>
+        <input type="text" name="person_to_meet">
+        <br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

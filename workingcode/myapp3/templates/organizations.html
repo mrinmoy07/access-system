@@ -1,0 +1,127 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organizations</title>
+</head>
+<body>
+    <h2>Organizations</h2>
+    <a href="{% url 'create_organization_template' %}">Create Organization</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>GST No</th>
+            <th>No of Employees</th>
+            <th>Access Control</th>
+        </tr>
+        {% for organization in organizations %}
+            <tr>
+                <td>{{ organization.name }}</td>
+                <td>{{ organization.address }}</td>
+                <td>{{ organization.gst_no }}</td>
+                <td>{{ organization.no_of_employees }}</td>
+                <td>{{ organization.access_control }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organizations</title>
+</head>
+<body>
+    <h2>Organizations</h2>
+
+    <a href="{% url 'create_organization_template' %}">Create Organization</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>GST No</th>
+            <th>No of Employees</th>
+            <th>Access Control</th>
+            <th>Action</th>
+        </tr>
+        {% for organization in organizations %}
+            <tr>
+                <td>{{ organization.name }}</td>
+                <td>{{ organization.address }}</td>
+                <td>{{ organization.gst_no }}</td>
+                <td>{{ organization.no_of_employees }}</td>
+                <td>{{ organization.access_control }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_organization_template' organization.id %}">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ organization.name }}?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Organizations</title>
+</head>
+<body>
+    <h2>Organizations</h2>
+
+    <!-- Link to create a new organization -->
+    <a href="{% url 'create_organization_template' %}">Create Organization</a>
+    <br><br>
+
+    <!-- Table displaying organizations -->
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>GST No</th>
+            <th>No of Employees</th>
+            <th>Access Control</th>
+            <th>Action</th>
+        </tr>
+        {% for organization in organizations %}
+            <tr>
+                <td>{{ organization.name }}</td>
+                <td>{{ organization.address }}</td>
+                <td>{{ organization.gst_no }}</td>
+                <td>{{ organization.no_of_employees }}</td>
+                <td>{{ organization.access_control }}</td>
+                <td>
+                    <form method="post" action="{% url 'delete_organization_template' organization.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete {{ organization.name }}?');">Delete</button>
+                    </form>
+                    <a href="{% url 'edit_organization_template' organization.id %}">Edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Link to go back to the Home Page -->
+    <br>
+    <a href="{% url 'home' %}">Go Back to Home Page</a>
+</body>
+</html>

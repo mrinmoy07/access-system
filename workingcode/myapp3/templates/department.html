@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Department</title>
+</head>
+<body>
+    <h2>Create Department</h2>
+    <form id="create-organization-form" method="post" action="{% url 'create_department_template' %}">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label>Organization:</label>
+        <select type="text" name="organization" required>
+            <option value="" disabled selected>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}">{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>integrate_with_ai_camera:</label>
+        <input type="checkbox" name="integrate_with_ai_camera" value="true">
+        <br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

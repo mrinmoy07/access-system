@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shifts</title>
+</head>
+<body>
+    <h2>Shifts</h2>
+    {% if request.user.role == 'hr' %}
+        <a href="{% url 'create_shift_template' %}">Create Shift</a>
+        <br>
+    {% endif %}
+    <a href="{% url 'shift_assignments_template' %}">View Shift Assignments</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Shift Start Time</th>
+            <th>Shift End Time</th>
+            <th>Total Work Time</th>
+            <th>Total Break Time</th>
+            <th>Created By</th>
+            <th>Created At</th>
+            {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+            <th>Actions</th>
+            {% endif %}
+        </tr>
+        {% for shift in shifts %}
+            <tr>
+                <td>{{ shift.shift_name }}</td>
+                <td>{{ shift.shift_start_time }}</td>
+                <td>{{ shift.shift_end_time }}</td>
+                <td>{{ shift.total_work_time }}</td>
+                <td>{{ shift.total_break_time }}</td>
+                <td>{{ shift.created_by }}</td>
+                <td>{{ shift.created_at }}</td>
+                {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+                <td>
+                    <a href="{% url 'shift_delete_template' shift.id %}">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

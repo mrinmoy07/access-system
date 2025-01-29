@@ -1,0 +1,165 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Holiday Lists</title>
+</head>
+<body>
+    <h2>Holiday Lists</h2>
+    {% if request.user.role == 'hr' %}
+        <a href="{% url 'create_holiday_template' %}">Create Holiday List</a>
+    {% endif %}
+    <h2>Existing Holiday Lists</h2>
+    <table>
+        <tr>
+            <th>Created By</th>
+            <th>Dates</th>
+            <th>Verified</th>
+            <th>Created at</th>
+            {% if request.user.role == 'superadmin' %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+        {% for holiday in holidays %}
+            <tr>
+                <td>{{ holiday.created_by }}</td>
+                <td>{{ holiday.holiday_dates }}</td>
+                <td>{{ holiday.is_verified }}</td>
+                <td>{{ holiday.created_at }}</td>
+                {% if request.user.role == 'superadmin' %}
+                <td>
+                    {% if holiday.is_verified == False %}
+                        <a href="{% url 'verify_holiday_template' holiday.id %}">Verify</a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> -->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Holiday Lists</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 6px 12px;
+            color: #fff;
+            background-color: #4CAF50; /* Green background for buttons */
+            border-radius: 4px;
+            margin-right: 10px; /* Space between buttons */
+            display: inline-block; /* Ensure buttons are displayed correctly */
+            width: 100px; /* Uniform button width */
+            text-align: center;
+        }
+
+        a:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 90%; /* Slightly smaller width */
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #f9f9f9;
+        }
+
+        th, td {
+            padding: 8px 12px; /* Smaller padding for a more compact table */
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        td a {
+            margin: 5px 0; /* Add vertical margin to buttons */
+            display: inline-block; /* Stack buttons vertically */
+        }
+
+        /* Set specific column widths */
+        th:nth-child(1), td:nth-child(1) { /* Created By column */
+            width: 120px;
+        }
+
+        th:nth-child(2), td:nth-child(2) { /* Dates column */
+            width: 180px;
+        }
+
+        th:nth-child(3), td:nth-child(3) { /* Verified column */
+            width: 100px;
+        }
+
+        th:nth-child(4), td:nth-child(4) { /* Created At column */
+            width: 160px;
+        }
+
+        /* Actions column */
+        th:nth-child(5), td:nth-child(5) {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Holiday Lists</h2>
+    {% if request.user.role == 'hr' %}
+        <a href="{% url 'create_holiday_template' %}">Create Holiday List</a>
+    {% endif %}
+    <h2>Existing Holiday Lists</h2>
+    <table>
+        <tr>
+            <th>Created By</th>
+            <th>Dates</th>
+            <th>Verified</th>
+            <th>Created at</th>
+            {% if request.user.role == 'superadmin' %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+        {% for holiday in holidays %}
+            <tr>
+                <td>{{ holiday.created_by }}</td>
+                <td>{{ holiday.holiday_dates }}</td>
+                <td>{{ holiday.is_verified }}</td>
+                <td>{{ holiday.created_at }}</td>
+                {% if request.user.role == 'superadmin' %}
+                <td>
+                    {% if holiday.is_verified == False %}
+                        <a href="{% url 'verify_holiday_template' holiday.id %}">Verify</a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Camera Setup</title>
+</head>
+<body>
+    <h1>Edit Camera Setup</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="camera_id">Camera:</label>
+        <select id="camera_id" name="camera_id" required>
+            <option value="">Select Camera</option>
+            {% for camera in cameras %}
+                <option value="{{ camera.id }}" {% if camera.id == camera_setup.camera.id %}selected{% endif %}>{{ camera.camera_id }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="department_id">Department:</label>
+        <select id="department_id" name="department_id" required>
+            <option value="">Select Department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}" {% if department.id == camera_setup.department.id %}selected{% endif %}>{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="integrate_with_access_control">Integrate with Access Control:</label>
+        <input type="checkbox" id="integrate_with_access_control" name="integrate_with_access_control" {% if camera_setup.integrate_with_access_control %}checked{% endif %}>
+        <br>
+
+        <label for="entry_exit">Entry/Exit:</label>
+        <input type="text" id="entry_exit" name="entry_exit" value="{{ camera_setup.entry_exit }}">
+        <br>
+
+        <button type="submit">Update Camera Setup</button>
+    </form>
+</body>
+</html>

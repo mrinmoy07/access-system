@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Organization</title>
+</head>
+<body>
+    <h2>Edit Organization: {{ organization.name }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ organization.name }}" required>
+        <br>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" value="{{ organization.address }}" required>
+        <br>
+
+        <label for="gst_no">GST No:</label>
+        <input type="text" id="gst_no" name="gst_no" value="{{ organization.gst_no }}" required>
+        <br>
+
+        <label for="no_of_employees">No of Employees:</label>
+        <select id="no_of_employees" name="no_of_employees" required>
+            {% for choice_value, choice_display in name_choices %}
+                <option value="{{ choice_value }}" {% if organization.no_of_employees == choice_value %}selected{% endif %}>
+                    {{ choice_display }}
+                </option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="access_control">Access Control:</label>
+        <input type="checkbox" id="access_control" name="access_control" {% if organization.access_control %}checked{% endif %}>
+        <br><br>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <br>
+    <a href="{% url 'list_organizations_template' %}">Back to Organizations</a>
+</body>
+</html>
+

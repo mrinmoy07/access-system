@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Camera Setup</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete the camera setup for {{ camera_setup.camera.camera_id }}?</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{% url 'manage_camera_setups_template' %}">Cancel</a>
+</body>
+</html>

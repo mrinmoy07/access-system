@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Entry/Exit List</title>
+    <style>
+        body {
+            background-color: whitesmoke;
+        }
+        h1 {
+            color: blue;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: whitesmoke;
+        }
+        th {
+            background-color: rgb(0, 255, 204);
+            color: black;
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>User Entry/Exit List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Date/Time</th>
+                <th>Door</th>
+                <th>Entry/Exit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for entry in entries %}
+            <tr>
+                <td>{{ entry.user.full_name }}</td>
+                <td>{{ entry.datetime }}</td>
+                <td>{{ entry.door }}</td>
+                <td>{{ entry.entryexit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

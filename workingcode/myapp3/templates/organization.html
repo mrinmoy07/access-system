@@ -1,0 +1,73 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Organization</title>
+</head>
+<body>
+    <h2>Create Organization</h2>
+    <form id="create-organization-form" method="post" action="{% url 'create_organization_template' %}">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label>address:</label>
+        <input type="text" name="address" required>
+        <br>
+        <label>gst_no:</label>
+        <input type="text" name="gst_no" required>
+        <br>
+        <label>no_of_employees:</label>
+        <input type="text" name="no_of_employees" required>
+        <br>
+        <label>access_control:</label>
+        <input type="checkbox" name="access_control" value="true">
+        <br>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Organization</title>
+</head>
+<body>
+    <h2>Create Organization</h2>
+    <form id="create-organization-form" method="post" action="{% url 'create_organization_template' %}">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" required>
+        <br>
+        <label>Address:</label>
+        <input type="text" name="address" required>
+        <br>
+        <label>GST No:</label>
+        <input type="text" name="gst_no" required>
+        <br>
+        
+        <label>No of Employees:</label>
+        <select name="no_of_employees" required>
+            <option value="" disabled selected>Select number of employees</option>
+            {% for value, display in organization.NAME_CHOICES %}
+                <option value="{{ value }}">{{ display }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Access Control:</label>
+        <input type="checkbox" name="access_control" value="true">
+        <br>
+        
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>

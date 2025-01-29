@@ -1,0 +1,120 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Shift</title>
+</head>
+<body>
+    <h2>Assign Shift</h2>
+    <form id="assign-shift-form" method="post" action="{% url 'assign_shift_template' %}">
+        {% csrf_token %}
+        <label>employee:</label>
+        <select name="employee_id" required>
+            <option value="" disabled selected>Select Employee</option>
+            {% for employee in employees %}
+                <option value="{{ employee.employee_code }}">{{ employee.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>shift:</label>
+        <select name="shift_id" required>
+            <option value="" disabled selected>Select Shift</option>
+            {% for shift in shifts %}
+                <option value="{{ shift.id }}">{{ shift }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>weekly_holiday:</label>
+        <input type="text" name="weekly_holiday" required>
+        <br>
+        <label>government_holiday_applicable:</label>
+        <input type="checkbox" name="government_holiday_applicable" value="true">
+        <br>
+        <label>earned_leave_qty:</label>
+        <input type="number" name="earned_leave_qty" required>
+        <br>
+        <label>paid_leave_qty:</label>
+        <input type="number" name="paid_leave_qty" required>
+        <br>
+        <label>casual_leave_qty:</label>
+        <input type="number" name="casual_leave_qty" required>
+        <br>
+        <label>applicable_from:</label>
+        <input type="date" name="applicable_from" required>
+        <br>
+        <button type="submit">Assign</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assign Shift</title>
+</head>
+<body>
+    <h2>Assign Shift</h2>
+    <form id="assign-shift-form" method="post" action="{% url 'assign_shift_template' %}">
+        {% csrf_token %}
+        
+        <label>Employee:</label>
+        <select name="employee_id" required>
+            <option value="" disabled selected>Select Employee</option>
+            {% for employee in employees %}
+                <option value="{{ employee.employee_code }}">{{ employee.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Shift:</label>
+        <select name="shift_id" required>
+            <option value="" disabled selected>Select Shift</option>
+            {% for shift in shifts %}
+                <option value="{{ shift.id }}">{{ shift }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Weekly Holiday:</label>
+        <div>
+            <label><input type="checkbox" name="weekly_holiday" value="Monday"> Monday</label><br>
+            <label><input type="checkbox" name="weekly_holiday" value="Tuesday"> Tuesday</label><br>
+            <label><input type="checkbox" name="weekly_holiday" value="Wednesday"> Wednesday</label><br>
+            <label><input type="checkbox" name="weekly_holiday" value="Thursday"> Thursday</label><br>
+            <label><input type="checkbox" name="weekly_holiday" value="Friday"> Friday</label><br>
+            <label><input type="checkbox" name="weekly_holiday" value="Saturday"> Saturday</label><br>
+            <label><input type="checkbox" name="weekly_holiday" value="Sunday"> Sunday</label><br>
+        </div>
+        <br>
+        
+        <label>Government Holiday Applicable:</label>
+        <input type="checkbox" name="government_holiday_applicable" value="true">
+        <br>
+        
+        <label>Earned Leave Quantity:</label>
+        <input type="number" name="earned_leave_qty" required>
+        <br>
+        
+        <label>Paid Leave Quantity:</label>
+        <input type="number" name="paid_leave_qty" required>
+        <br>
+        
+        <label>Casual Leave Quantity:</label>
+        <input type="number" name="casual_leave_qty" required>
+        <br>
+        
+        <label>Applicable From:</label>
+        <input type="date" name="applicable_from" required>
+        <br>
+        
+        <button type="submit">Assign</button>
+    </form>
+</body>
+</html>
+

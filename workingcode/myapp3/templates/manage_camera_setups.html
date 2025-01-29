@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Camera Setups</title>
+    <script>
+        // Function to toggle the Entry/Exit dropdown based on the checkbox state
+        function toggleEntryExitDropdown() {
+            const integrateWithAccessControl = document.getElementById('integrate_with_access_control');
+            const entryExitDropdown = document.getElementById('entry_exit');
+            // If the checkbox is checked, enable the dropdown
+            if (integrateWithAccessControl.checked) {
+                entryExitDropdown.disabled = false;
+            } else {
+                entryExitDropdown.disabled = true;
+                entryExitDropdown.value = '';  // Reset the dropdown value if disabled
+            }
+        }
+
+        // Initially call the function to set the correct state of the Entry/Exit dropdown
+        window.onload = function() {
+            toggleEntryExitDropdown();
+            document.getElementById('integrate_with_access_control').addEventListener('change', toggleEntryExitDropdown);
+        };
+    </script>
+</head>
+<body>
+    <h1>Manage Camera Setups</h1>
+
+    <!-- Form for adding a new camera setup -->
+    <form method="post">
+        {% csrf_token %}
+        <label for="camera_id">Camera:</label>
+        <select id="camera_id" name="camera_id" required>
+            <option value="">Select Camera</option>
+            {% for camera in cameras %}
+                <option value="{{ camera.id }}">{{ camera.camera_id }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="department_id">Department:</label>
+        <select id="department_id" name="department_id" required>
+            <option value="">Select Department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label for="integrate_with_access_control">Integrate with Access Control:</label>
+        <input type="checkbox" id="integrate_with_access_control" name="integrate_with_access_control">
+        <br>
+
+        <label for="entry_exit">Entry/Exit:</label>
+        <select id="entry_exit" name="entry_exit" disabled>
+            <option value="">Select Entry or Exit</option>
+            <option value="entry">Entry</option>
+            <option value="exit">Exit</option>
+        </select>
+        <br>
+
+        <button type="submit">Create Camera Setup</button>
+    </form>
+
+    <!-- Display existing camera setups -->
+    <h2>Existing Camera Setups</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Camera ID</th>
+                <th>Department</th>
+                <th>Integrate with Access Control</th>
+                <th>Entry/Exit</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for setup in camera_setups %}
+            <tr>
+                <td>{{ setup.camera.camera_id }}</td>
+                <td>{{ setup.department.name }}</td>
+                <td>{{ setup.integrate_with_access_control }}</td>
+                <td>{{ setup.entry_exit }}</td>
+                <td>
+                    <a href="{% url 'edit_camera_setup' setup.id %}">Edit</a>
+                    <a href="{% url 'delete_camera_setup' setup.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Link to go back to the Home Page -->
+    <br>
+    <a href="{% url 'home' %}">Go Back to Home Page</a>
+</body>
+</html>

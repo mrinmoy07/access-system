@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face List</title>
+    <style>
+        body {
+            background-color: white;
+        }
+        h1 {
+            color: darkblue;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: whitesmoke;
+            color: black;
+            padding: 10px;
+        }
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .user-name {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <h1>Face List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Face Encoding</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for face in faces %}
+            <tr>
+                <td class="user-name">{{ face.user.full_name }}</td>
+                <td>{{ face.face_enc }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

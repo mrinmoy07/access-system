@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shift Assignments</title>
+</head>
+<body>
+    <h2>Shift Assignments</h2>
+    {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+        <a href="{% url 'assign_shift_template' %}">Assign Shift</a>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Employee</th>
+            <th>Shift</th>
+            <th>Weekly Holiday</th>
+            <th>Government Holiday Applicable</th>
+            <th>Earned Leave Qty</th>
+            <th>Paid Leave Qty</th>
+            <th>Casual Leave Qty</th>
+            <th>Applicable From</th>
+            <th>Assigned By</th>
+            <th>Created At</th>
+        </tr>
+        {% for shift_assignment in assignments %}
+            <tr>
+                <td>{{ shift_assignment.employee.name }}</td>
+                <td>{{ shift_assignment.shift }}</td>
+                <td>{{ shift_assignment.weekly_holiday }}</td>
+                <td>{{ shift_assignment.government_holiday_applicable }}</td>
+                <td>{{ shift_assignment.earned_leave_qty }}</td>
+                <td>{{ shift_assignment.paid_leave_qty }}</td>
+                <td>{{ shift_assignment.casual_leave_qty }}</td>
+                <td>{{ shift_assignment.applicable_from }}</td>
+                <td>{{ shift_assignment.assigned_by.name }}</td>
+                <td>{{ shift_assignment.created_at }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

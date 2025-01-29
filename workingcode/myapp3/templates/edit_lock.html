@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Lock</title>
+</head>
+<body>
+    <h1>Edit Lock</h1>
+    <a href="{% url 'manage_locks_template' %}">Back to Manage Locks</a>
+    <hr>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Lock Name" value="{{ lock.name }}" required>
+        <input type="text" name="com_port" placeholder="COM Port" value="{{ lock.com_port }}" required>
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+</html>

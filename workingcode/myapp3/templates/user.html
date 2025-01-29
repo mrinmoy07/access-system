@@ -1,0 +1,369 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if user %}Edit{% else %}Create{% endif %} User</title>
+</head>
+<body>
+    <h2>{% if user %}Edit{% else %}Create{% endif %} User</h2>
+    <form id="user-form" method="post" action="{% if user %}{% url 'user' user.id %}{% endif %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ user.name }}" required>
+        <br>
+        <label>role:</label>
+        <select type="text" name="role" required>
+            <option value="" disabled {% if not user.name %}selected{% endif %}>Select role</option>
+            {% for role in roles %}
+                <option value="{{ role }}" {% if user.name == role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        {% if request.user.role == 'hr' %}
+        <label>Can Create Guest Pass:</label>
+        <input type="checkbox" name="can_create_guest_pass" value="true">
+        <br>
+        {% endif %}
+        <label>Organization:</label>
+        <select type="text" name="organization" required>
+            <option value="" disabled {% if not user.organization %}selected{% endif %}>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}" {% if user.organization == organization.id %}selected{% endif %}>{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>department:</label>
+        <select type="text" name="department" required>
+            <option value="" disabled {% if not user.department %}selected{% endif %}>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}" {% if user.department == department.id %}selected{% endif %}>{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label>designation:</label>
+        <input type="text" name="designation" value="{{ user.designation }}" required>
+        <br>
+        <label>blood_group:</label>
+        <input type="text" name="blood_group" value="{{ user.blood_group }}" required>
+        <br>
+        <label>emergency_contact:</label>
+        <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}" required>
+        <br>
+        <label>password:</label>
+        <input type="text" name="password" required>
+        <br>
+        <label>photo:</label>
+        {% if user.photo %}
+        <a href="{{ user.photo.url }}" target="_blank">View Photo</a>
+        {% endif %}
+        <input type="file" name="photo"required>
+        <br>
+        <button type="submit">{% if user %}Save{% else %}Create{% endif %}</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if user %}Edit{% else %}Create{% endif %} User</title>
+</head>
+<body>
+    <h2>{% if user %}Edit{% else %}Create{% endif %} User</h2>
+    <form id="user-form" method="post" action="{% if user %}{% url 'user' user.id %}{% endif %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ user.name }}" required>
+        <br>
+        
+        <label>Role:</label>
+        <select name="role" required>
+            <option value="" disabled {% if not user.name %}selected{% endif %}>Select role</option>
+            {% for role in roles %}
+                <option value="{{ role }}" {% if user.name == role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        {% if request.user.role == 'hr' %}
+        <label>Can Create Guest Pass:</label>
+        <input type="checkbox" name="can_create_guest_pass" value="true" id="guest-pass-checkbox" {% if user.role != 'front desk' %}disabled{% endif %}>
+        <br>
+        {% endif %}
+        
+        <label>Organization:</label>
+        <select name="organization" required>
+            <option value="" disabled {% if not user.organization %}selected{% endif %}>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}" {% if user.organization == organization.id %}selected{% endif %}>{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Department:</label>
+        <select name="department" required>
+            <option value="" disabled {% if not user.department %}selected{% endif %}>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}" {% if user.department == department.id %}selected{% endif %}>{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ user.designation }}" required>
+        <br>
+        
+        <label>Blood Group:</label>
+        <input type="text" name="blood_group" value="{{ user.blood_group }}" required>
+        <br>
+        
+        <label>Emergency Contact:</label>
+        <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}" required>
+        <br>
+        
+        <label>Password:</label>
+        <input type="text" name="password" required>
+        <br>
+        
+        <label>Photo:</label>
+        {% if user.photo %}
+        <a href="{{ user.photo.url }}" target="_blank">View Photo</a>
+        {% endif %}
+        <input type="file" name="photo" required>
+        <br>
+        
+        <button type="submit">{% if user %}Save{% else %}Create{% endif %}</button>
+    </form>
+
+    <script>
+        // JavaScript to enable or disable the checkbox based on selected role
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.querySelector('select[name="role"]');
+            const guestPassCheckbox = document.getElementById('guest-pass-checkbox');
+
+            // Function to toggle checkbox based on role selection
+            function toggleGuestPassCheckbox() {
+                guestPassCheckbox.disabled = roleSelect.value !== 'front desk';
+            }
+
+            // Initial call to set the checkbox state
+            toggleGuestPassCheckbox();
+
+            // Event listener for role change
+            roleSelect.addEventListener('change', toggleGuestPassCheckbox);
+        });
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if user %}Edit{% else %}Create{% endif %} User</title>
+</head>
+<body>
+    <h2>{% if user %}Edit{% else %}Create{% endif %} User</h2>
+    <form id="user-form" method="post" action="{% if user %}{% url 'user' user.id %}{% endif %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ user.name }}" required>
+        <br>
+        
+        <label>Role:</label>
+        <select name="role" required>
+            <option value="" disabled {% if not user.name %}selected{% endif %}>Select role</option>
+            {% for role in roles %}
+                <option value="{{ role }}" {% if user.role == role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        {% if request.user.role == 'hr' %}
+        <label>Can Create Guest Pass:</label>
+        <input type="checkbox" name="can_create_guest_pass" value="true" id="guest-pass-checkbox" {% if user.role != 'front desk' %}disabled{% endif %}>
+        <br>
+        {% endif %}
+        
+        <label>Organization:</label>
+        <select name="organization" required>
+            <option value="" disabled {% if not user.organization %}selected{% endif %}>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}" {% if user.organization == organization.id %}selected{% endif %}>{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Department:</label>
+        <select name="department" required>
+            <option value="" disabled {% if not user.department %}selected{% endif %}>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}" {% if user.department == department.id %}selected{% endif %}>{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ user.designation }}" required>
+        <br>
+        
+        <label>Blood Group:</label>
+        <input type="text" name="blood_group" value="{{ user.blood_group }}" required>
+        <br>
+        
+        <label>Emergency Contact:</label>
+        <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}" required>
+        <br>
+        
+        <label>Password:</label>
+        <input type="text" name="password" required>
+        <br>
+        
+        <label>Photo:</label>
+        {% if user.photo %}
+        <a href="{{ user.photo.url }}" target="_blank">View Photo</a>
+        {% endif %}
+        <input type="file" name="photo" required>
+        <br>
+        
+        <button type="submit">{% if user %}Save{% else %}Create{% endif %}</button>
+    </form>
+
+    <script>
+        // JavaScript to enable or disable the checkbox based on selected role
+        document.addEventListener('DOMContentLoaded', function () {
+            const roleSelect = document.querySelector('select[name="role"]');
+            const guestPassCheckbox = document.getElementById('guest-pass-checkbox');
+
+            // Function to toggle checkbox based on role selection
+            function toggleGuestPassCheckbox() {
+                guestPassCheckbox.disabled = roleSelect.value !== 'front desk';
+            }
+
+            // Initial call to set the checkbox state
+            toggleGuestPassCheckbox();
+
+            // Event listener for role change
+            roleSelect.addEventListener('change', toggleGuestPassCheckbox);
+        });
+    </script>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if user %}Edit{% else %}Create{% endif %} User</title>
+    <script>
+        // Function to toggle visibility of 'can_create_guest_pass' based on the selected role
+        function toggleGuestPassField() {
+            var roleSelect = document.getElementsByName("role")[0];
+            var guestPassField = document.getElementById("can_create_guest_pass_field");
+            var role = roleSelect.value;
+
+            // Show the checkbox only if the 'Front Desk' role is selected
+            if (role === "front desk") {
+                guestPassField.style.display = "block";
+            } else {
+                guestPassField.style.display = "none";
+                // Also uncheck the checkbox if it's hidden
+                document.getElementById("can_create_guest_pass").checked = false;
+            }
+        }
+
+        // Call the function on page load to set the initial state
+        window.onload = function() {
+            toggleGuestPassField();
+        }
+    </script>
+</head>
+<body>
+    <h2>{% if user %}Edit{% else %}Create{% endif %} User</h2>
+    <form id="user-form" method="post" action="{% if user %}{% url 'user' user.id %}{% endif %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Other fields -->
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ user.name }}" required>
+        <br>
+
+        <label>Role:</label>
+        <select name="role" required onchange="toggleGuestPassField()">
+            <option value="" disabled {% if not user.name %}selected{% endif %}>Select role</option>
+            {% for role in roles %}
+                <option value="{{ role }}" {% if user.role == role %}selected{% endif %}>{{ role }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label>Organization:</label>
+        <select name="organization" required>
+            <option value="" disabled {% if not user.organization %}selected{% endif %}>Select Organization</option>
+            {% for organization in organizations %}
+                <option value="{{ organization.id }}" {% if user.organization == organization.id %}selected{% endif %}>{{ organization.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label>Department:</label>
+        <select name="department" required>
+            <option value="" disabled {% if not user.department %}selected{% endif %}>Select department</option>
+            {% for department in departments %}
+                <option value="{{ department.id }}" {% if user.department == department.id %}selected{% endif %}>{{ department.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label>Designation:</label>
+        <input type="text" name="designation" value="{{ user.designation }}" required>
+        <br>
+
+        <label>Blood Group:</label>
+        <input type="text" name="blood_group" value="{{ user.blood_group }}" required>
+        <br>
+
+        <label>Emergency Contact:</label>
+        <input type="text" name="emergency_contact" value="{{ user.emergency_contact }}" required>
+        <br>
+
+        <!-- Password field -->
+        <label>Password:</label>
+        <input type="password" name="password" required> <!-- Changed to password type -->
+        <br>
+
+        <!-- Can Create Guest Pass Checkbox, initially hidden -->
+        <div id="can_create_guest_pass_field" style="display: none;">
+            <label for="can_create_guest_pass">Can Create Guest Pass:</label>
+            <input type="checkbox" name="can_create_guest_pass" id="can_create_guest_pass" value="true" {% if user.can_create_guest_pass or can_create_guest_pass %}checked{% endif %}>
+            <br>
+        </div>
+
+        <!-- Photo field -->
+        <label>Photo:</label>
+        {% if user.photo %}
+            <a href="{{ user.photo.url }}" target="_blank">View Photo</a>
+        {% endif %}
+        <input type="file" name="photo" required>
+        <br>
+
+        <button type="submit">{% if user %}Save{% else %}Create{% endif %}</button>
+    </form>
+</body>
+</html>

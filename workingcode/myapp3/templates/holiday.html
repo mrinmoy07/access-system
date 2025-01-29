@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Holiday List</title>
+</head>
+<body>
+    <h2>Create Holiday List</h2>
+    <form id="create-holiday-form" method="post" action="{% url 'create_holiday_template' %}">
+        {% csrf_token %}
+        <label>Dates:</label>
+        <div class="form-input">
+            <input type="date" name="holiday_dates" required>
+            <br>
+        </div>
+        <button type="button" onclick="addHoliday()">Add Date</button>
+        <br>
+        <button type="submit">Create</button>
+    </form>
+    <script>
+        function addHoliday() {
+            var holiday_dates = document.getElementsByClassName('form-input');
+            var holiday_dates_count = holiday_dates.length;
+            var new_holiday_dates = holiday_dates[0].cloneNode(true);
+            new_holiday_dates.value = '';
+            document.getElementById('create-holiday-form').insertBefore(new_holiday_dates, document.getElementById('create-holiday-form').children[holiday_dates_count+2]);
+        }
+    </script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Holiday List</title>
+</head>
+<body>
+    <h2>Create Holiday List</h2>
+    <form id="create-holiday-form" method="post" action="{% url 'create_holiday_template' %}">
+        {% csrf_token %}
+        <label>Dates:</label>
+        <div class="form-input">
+            <input type="date" name="holiday_dates[]" required min="{{ today }}">
+            <br>
+        </div>
+        <button type="button" onclick="addHoliday()">Add Date</button>
+        <br>
+        <button type="submit">Create</button>
+    </form>
+    <script>
+        function addHoliday() {
+            // Get the first date input as a reference
+            var holiday_dates = document.getElementsByClassName('form-input')[0];
+            
+            // Clone the div containing the date input field
+            var new_holiday_input = holiday_dates.cloneNode(true);
+
+            // Clear the value of the cloned input
+            new_holiday_input.querySelector('input').value = '';
+            
+            // Append the cloned div with the new date input to the form
+            document.getElementById('create-holiday-form').insertBefore(
+                new_holiday_input, 
+                document.getElementById('create-holiday-form').children[document.getElementById('create-holiday-form').children.length - 2]
+            );
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Locks</title>
+</head>
+<body>
+    <h1>Manage Locks</h1>
+    <a href="{% url 'home' %}">Back to Home</a>
+    <hr>
+
+    <!-- Display Success Messages -->
+    {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Displaying existing locks if any -->
+    <h2>Existing Locks</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>COM Port</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lock in locks %}
+            <tr>
+                <td>{{ lock.name }}</td>
+                <td>{{ lock.com_port }}</td>
+                <td>
+                    <!-- Edit Lock Form (Redirect to Edit Lock page) -->
+                    <a href="{% url 'edit_lock' lock.id %}">Edit</a> | 
+
+                    <!-- Delete Lock Form -->
+                    <form action="{% url 'delete_lock' lock.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <hr>
+
+    <!-- Create New Lock Form -->
+    <h2>Create New Lock</h2>
+    <form action="{% url 'manage_locks_template' %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Lock Name" required>
+        <input type="text" name="com_port" placeholder="COM Port" required>
+        <button type="submit">Create Lock</button>
+    </form>
+</body>
+</html>

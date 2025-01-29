@@ -1,0 +1,88 @@
+>>Install Django
+
+>>Create a Django project
+
+django-admin startproject myproject
+
+Here, myproject is the name of your project. You can choose any name you like.
+
+>>Navigate to Your Project Directory
+
+cd myproject
+
+>>Run the Development Server
+
+python manage.py runserver
+
+>>Create a Django App
+
+python manage.py startapp myapp
+
+Here, myapp is the name of your app. You can choose any name you like.
+
+>>Add the App to Your Project
+
+Open myproject/settings.py
+
+Find the INSTALLED_APPS list and add your app’s name to it:
+
+>> Define Models
+
+Models are classes that define the structure of your database.
+
+Create Models: Open myapp/models.py and define your models
+
+>>Apply Migrations
+
+Migrations are how Django tracks changes to your models and applies them to your database
+
+>>Create Migrations
+
+python manage.py makemigrations
+
+>>Apply Migrations
+
+python manage.py migrate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<>                             <>                            <>                             <>                          <>                        <>                              <>                              <>
+
+
+
+
+
+
+For the app
+
+>>if the laptop is connected to the wifi of the mobile 
+
+From laptop run ipconfig to get the ip of the laptop
+
+And port will see while running the server code
+
+{ when i change the ip of the laptop to 192.168.1.1 and run the server  is at http://192.168.1.1:3000
+ But when i open the app and click on face registration ,after filling the details it shows unable to connect
+to the network and in the browser it shows unable to connect
+
+Open the address in your mobile browser to test if running
+
+>> Without changing the ipv4 address 
+Keeping the address of the mobile from where the wifi is taken and also the app is  is installed 
+in the same mobile
+
+>> in browser whatever the address is showing add to the ip field of the mobile 
+
+ 

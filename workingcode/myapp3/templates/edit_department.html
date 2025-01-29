@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Department</title>
+</head>
+<body>
+    <h2>Edit Department: {{ department.name }}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{ department.name }}" required>
+        <br><br>
+
+        <label for="organization">Organization:</label>
+        <select id="organization" name="organization" required>
+            {% for org in organizations %}
+                <option value="{{ org.id }}" {% if org.id == department.organization.id %}selected{% endif %}>
+                    {{ org.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="integrate_with_ai_camera">Integrate with AI Camera:</label>
+        <input type="checkbox" id="integrate_with_ai_camera" name="integrate_with_ai_camera"
+               {% if department.integrate_with_ai_camera %}checked{% endif %}>
+        <br><br>
+
+        <button type="submit">Update Department</button>
+    </form>
+
+    <br>
+    <a href="{% url 'list_departments_template' %}">Back to Departments</a>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guests</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h2>Guests</h2>
+    {% if request.user.can_create_guest_pass %}
+        <a href="{% url 'create_guest_template' %}">Create Guest</a>
+    {% endif %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Photo</th>
+            <th>Visit Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Organization</th>
+            <th>Department</th>
+            <th>Person to Meet</th>
+            <th>Requested By</th>
+            <th>Approved</th>
+            <th>Approved By</th>
+            <th>Approved At</th>
+            {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+                <th>Actions</th>
+            {% endif %}
+        </tr>
+        {% for guest in guests %}
+            <tr>
+                <td>{{ guest.name }}</td>
+                <td><img src="{{ guest.photo.url }}" alt="photo" style="width: 100px; height: 100px;"></td>
+                <td>{{ guest.visit_date }}</td>
+                <td>{{ guest.start_time }}</td>
+                <td>{{ guest.end_time }}</td>
+                <td>{{ guest.organization.name }}</td>
+                <td>{{ guest.department.name }}</td>
+                <td>{{ guest.person_to_meet }}</td>
+                <td>{{ guest.requested_by.name }}</td>
+                <td>{{ guest.is_approved }}</td>
+                <td>{{ guest.approved_by.name }}</td>
+                <td>{{ guest.approved_at }}</td>
+                {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+                <td>
+                    <a href="{% url 'delete_guest_template' guest.id %}">Delete</a>
+                    {% if not guest.is_approved %}
+                        <a href="{% url 'approve_guest_template' guest.id %}">Approve</a>
+                    {% endif %}
+                </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guests</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        a:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        img {
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .actions a {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Guests</h2>
+    {% if request.user.can_create_guest_pass %}
+        <a href="{% url 'create_guest_template' %}">Create Guest</a>
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Visit Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Organization</th>
+                <th>Department</th>
+                <th>Person to Meet</th>
+                <th>Requested By</th>
+                <th>Approved</th>
+                <th>Approved By</th>
+                <th>Approved At</th>
+                {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+                    <th>Actions</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for guest in guests %}
+                <tr>
+                    <td>{{ guest.name }}</td>
+                    <td><img src="{{ guest.photo.url }}" alt="photo" style="width: 100px; height: 100px;"></td>
+                    <td>{{ guest.visit_date }}</td>
+                    <td>{{ guest.start_time }}</td>
+                    <td>{{ guest.end_time }}</td>
+                    <td>{{ guest.organization.name }}</td>
+                    <td>{{ guest.department.name }}</td>
+                    <td>{{ guest.person_to_meet }}</td>
+                    <td>{{ guest.requested_by.name }}</td>
+                    <td>{{ guest.is_approved }}</td>
+                    <td>{{ guest.approved_by.name }}</td>
+                    <td>{{ guest.approved_at }}</td>
+                    {% if request.user.role == 'hr' or request.user.role == 'superadmin' %}
+                    <td class="actions">
+                        <a href="{% url 'delete_guest_template' guest.id %}" style="background-color: #dc3545;">Delete</a>
+                        {% if not guest.is_approved %}
+                            <a href="{% url 'approve_guest_template' guest.id %}" style="background-color: #28a745;">Approve</a>
+                        {% endif %}
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

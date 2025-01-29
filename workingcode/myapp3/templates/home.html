@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    <h2>Welcome, {{ request.user.name }}</h2>
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+
+  
+    {% if request.user.role == 'superadmin' %}
+    <a href='{% url "list_organizations_template" %}'>Manage Organizations</a>
+    <br>
+    <a href='{% url "list_departments_template" %}'>Manage Departments</a>
+    <br>
+    <a href='{% url "user_list_template" %}'>Manage Users</a>
+    <br>
+    <a href='{% url "shift_list_template" %}'>Manage Shifts</a>
+    <br>
+    <a href='{% url "list_holidays_template" %}'>Manage Holidays</a>
+    <br>
+    <a href='{% url "list_guests_template" %}'>Manage Guests</a>
+    <br>
+    <a href='{% url "attendance_report" %}'>Staff and Guest Report</a>
+    <br>
+    <a href='{% url "manage_locks_template" %}'>Manage Locks</a><!-- Added this line -->
+    <br>
+    <a href='{% url "manage_cameras_template" %}'>Manage Cameras</a> <!-- Added this line -->
+    <br>
+    <a href='{% url "manage_camera_setups_template" %}'>Manage Camera Setups</a> <!-- Added this line -->
+    <br>
+    {% elif request.user.role == 'hr' %}
+    <a href='{% url "user_list_template" %}'>Manage Users</a>
+    <br>
+    <a href='{% url "shift_list_template" %}'>Manage Shifts</a>
+    <br>
+    <a href='{% url "list_holidays_template" %}'>Manage Holidays</a>
+    <br>
+    <a href='{% url "list_guests_template" %}'>Manage Guests</a>
+    <br>
+    <a href='{% url "attendance_report" %}'>Staff and Guest Report</a>
+    <br>
+    <a href="{% url 'shift_assignments_template' %}">View Shift Assignments</a>
+    <br>
+    {% elif request.user.role == 'front desk' %}
+    <a href='{% url "list_guests_template" %}'>Manage Guests</a>
+    <br>
+    {% elif request.user.role == 'accounts' %}
+    <a href='{% url "attendance_report" %}'>Staff and Guest Report</a>
+    <br>
+
+   
+   
+
+    {% endif %}
+       <!-- "Change Password" link for all users -->
+    <a href="{% url 'change_password' %}">Change Password</a>
+    <br>
+</body>
+</html>

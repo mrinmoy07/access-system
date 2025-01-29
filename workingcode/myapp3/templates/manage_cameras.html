@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Cameras</title>
+</head>
+<body>
+    <h1>Manage Cameras</h1>
+    <a href="{% url 'home' %}" style="text-decoration: none; color: white; background-color: blue; padding: 5px 10px; border-radius: 5px;">Go Back to Home Page</a>
+    <br><br>
+    <form method="post">
+        {% csrf_token %}
+        <label for="camera_id">Camera ID:</label>
+        <input type="text" id="camera_id" name="camera_id" required>
+        <br>
+        <label for="in_out">In/Out:</label>
+        <input type="text" id="in_out" name="in_out" required>
+        <br>
+        <label for="lock_id">Lock ID:</label>
+        <input type="text" id="lock_id" name="lock_id" required>
+        <br>
+        <label for="attendance">Attendance:</label>
+        <input type="checkbox" id="attendance" name="attendance">
+        <br>
+        <button type="submit">Add Camera</button>
+    </form>
+
+    <h2>Existing Cameras</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Camera ID</th>
+                <th>In/Out</th>
+                <th>Lock ID</th>
+                <th>Attendance</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for camera in cameras %}
+            <tr>
+                <td>{{ camera.id }}</td>
+                <td>{{ camera.camera_id }}</td>
+                <td>{{ camera.in_out }}</td>
+                <td>{{ camera.lock_id }}</td>
+                <td>{{ camera.attendance }}</td>
+                <td>
+                    <a href="{% url 'edit_camera_template' camera.id %}">Edit</a>
+                    <form method="post" action="{% url 'delete_camera_template' camera.id %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
