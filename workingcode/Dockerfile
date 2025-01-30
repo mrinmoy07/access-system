@@ -1,35 +1,31 @@
 FROM python:3.11-slim
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Install required system dependencies for dlib
+RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
-    ffmpeg \
-    libgl1 \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender-dev \
-    portaudio19-dev \
-    pkg-config \
+    libopenblas-dev \
+    liblapack-dev \
+    libx11-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory
 WORKDIR /app
 
-# Copy both requirements files
-COPY docker-requirements.txt /app/
-COPY requirements.txt /app/
-
-# Install Python dependencies from docker-requirements.txt
+# Install dlib AFTER installing dependencies
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r docker-requirements.txt
+    pip install --no-cache-dir dlib
 
-# Copy the rest of the application code
+# Install other Python dependencies
+RUN pip install --no-cache-dir \
+    djangorestframework \
+    pytz \
+    Pillow \
+    numpy \
+    face_recognition \
+    requests
+
+# Copy the rest of your Django project
 COPY . /app/
 
-# Expose the port the app runs on
-EXPOSE 8000
 
-# Run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "manage.py", "runserver", "--noreload", "0.0.0.0:8000"]
